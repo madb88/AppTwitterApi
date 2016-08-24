@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+
+<div class="container">
+	<h2>You just added new tweet</h2>
+	<p>Twitt has been saved in db</p>
+
+	<p>Text of that twiit: {{ newTweet.text }}</p>
+	<p>Created at: {{ newTweet.created_at }}</p>
+	<p>Created by: {{ newTweet.user.name }}<p>
+		
+	<a href={{ path('finish') }} class="btn btn-default">Back</a>
+</div>
+
+{% endblock %}

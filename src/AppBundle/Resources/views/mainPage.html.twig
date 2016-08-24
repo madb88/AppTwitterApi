@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+	<div class="container">
+		<h1>First you have to login</h1>
+		<a href={{ path('homepage') }} class="btn btn-default">Login with Twitter</a>
+	</div>
+{% endblock %}
+
+

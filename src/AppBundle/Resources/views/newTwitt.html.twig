@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+<div class="container">
+	{{form(form)}}
+	<a href={{ path('finish') }} class="btn btn-default">Back</a>
+
+</div>
+
+{% endblock %}

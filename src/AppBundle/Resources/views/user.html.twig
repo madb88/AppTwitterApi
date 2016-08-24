@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+	<div class="container">
+		<h2>You are logged as {{ user.name }}</h2>
+		<p>Info about user:</p>
+		<ul>
+			<li>Username: {{ user.screen_name }}</li>
+			<li>Avatar: <img src={{ user.profile_image_url }}></li>
+		</ul>
+	</div>
+	<div class="container">
+		<h2>Functions</h2>
+			<form action="postTweet" method="POST">
+			<a href={{ path('createTwitt') }} class="btn btn-default">Write a Tweet</a>
+			<a href={{ path('showUserTwitts') }} class="btn btn-default">Show user Twitts</a>
+			<form>
+		</div>
+	</div>
+{% endblock %}

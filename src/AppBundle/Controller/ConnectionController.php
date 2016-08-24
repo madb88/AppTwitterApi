@@ -12,16 +12,17 @@ use AppBundle\Entity\Twitts;
 
 class ConnectionController extends Controller 
 {
-	 /**
-     * @Route("/main", name="homepage")
-     */
+
+	/**
+    *@Route("/main", name="homepage")
+    */
     public function indexAction(Request $request)
     {
-        $session = $request->getSession();	
+        $session = $request->getSession();
 
-        $url = $this->generateUrl('callBack');	
+        $url = $this->generateUrl('callBack');
         $connection = Twitts::connectionToApi();
-        
+
         $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => Twitts::OAUTH_CALLBACK));
         $session->set('oauth_token', $request_token['oauth_token']);
         $session->set('oauth_token_secret', $request_token['oauth_token_secret']);
@@ -31,29 +32,29 @@ class ConnectionController extends Controller
     }
 
     /**
-    * @Route("/callBack", name="callBack");
+    *@Route("/callBack", name="callBack");
     */
     public function callBackAction(Request $request)
     {
-		$session = $request->getSession();
+	    $session = $request->getSession();
 
-		$request_token = [];
-		$request_token['oauth_token'] = $session->get('oauth_token');
-		$request_token['oauth_token_secret'] = $session->get('oauth_token_secret');
+        $request_token = [];
+        $request_token['oauth_token'] = $session->get('oauth_token');
+        $request_token['oauth_token_secret'] = $session->get('oauth_token_secret');
 
-		$connection = new TwitterOAuth(Twitts::CONSUMER_KEY, Twitts::CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
-		$access_token = $connection->oauth("oauth/access_token", ["oauth_verifier" => $_REQUEST['oauth_verifier']]);
+        $connection = new TwitterOAuth(Twitts::CONSUMER_KEY, Twitts::CONSUMER_SECRET, $request_token['oauth_token'], $request_token['oauth_token_secret']);
+        $access_token = $connection->oauth("oauth/access_token", ["oauth_verifier" => $_REQUEST['oauth_verifier']]);
 		
-	    $session->set('access_token', $access_token);
+        $session->set('access_token', $access_token);
         $session->set('connection', $connection);
 
-		return $this->redirectToRoute('finish');
+        return $this->redirectToRoute('finish');
 	}
 
-	/**
-	*@Route ("/finish", name="finish");
-	*@Template("AppBundle::user.html.twig");
-	*/
+    /**
+    *@Route ("/finish", name="finish");
+    *@Template("AppBundle::user.html.twig");
+    */
     public function authorizationFinishAction(Request $request)
     {
     	$session = $request->getSession();

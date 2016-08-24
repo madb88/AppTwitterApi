@@ -13,7 +13,7 @@ use AppBundle\Entity\Twitts;
 class ConnectionController extends Controller 
 {
 
-	/**
+    /**
     *@Route("/main", name="homepage")
     */
     public function indexAction(Request $request)
@@ -36,7 +36,7 @@ class ConnectionController extends Controller
     */
     public function callBackAction(Request $request)
     {
-	    $session = $request->getSession();
+        $session = $request->getSession();
 
         $request_token = [];
         $request_token['oauth_token'] = $session->get('oauth_token');

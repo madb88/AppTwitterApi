@@ -13,6 +13,8 @@ use Abraham\TwitterOAuth\TwitterOAuth;
  */
 class Twitts
 {
+    
+
     /**
      * @var int
      *
@@ -42,6 +44,15 @@ class Twitts
     const CONSUMER_SECRET = 'QCKGmQp5pcHfnJZ15AJNmFqG9eTO30IDsjU7CF9qk0xnbtGXwE';
     
     const OAUTH_CALLBACK = 'http://127.0.0.1:8000/callBack';
+
+    static function connectionToApi()
+    {
+       
+        $connection = new TwitterOAuth(Twitts::CONSUMER_KEY, Twitts::CONSUMER_SECRET);
+            
+        return $connection;
+        
+    }
 
     /**
      * Get id
@@ -125,14 +136,6 @@ class Twitts
         return $this->imgTwitt;
     }
 
-
-    static function connectionToApi(){
-       
-        $connection = new TwitterOAuth(Twitts::CONSUMER_KEY, Twitts::CONSUMER_SECRET);
-            
-        return $connection;
-        
-    }
 
 }
 
